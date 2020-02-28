@@ -84,8 +84,9 @@ def fnv_1a(key):
     hval = 14695981039346656073
     fnv_64_prime = 1099511628211
     for t_str in key:
-        hval = hval ^ ord(t_str)
-        hval = (hval * fnv_64_prime) % max64mod
+        hval ^= ord(t_str)
+        hval *= fnv_64_prime
+        hval %= max64mod
     return hval
 
 

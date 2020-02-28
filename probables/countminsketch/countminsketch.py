@@ -560,8 +560,29 @@ class HeavyHitters(CountMinSketch):
 
 
 class StreamThreshold(CountMinSketch):
-    ''' keep track of those elements over a certain threshold '''
+    ''' Keep track of those elements that are above a pre-defined threshold
 
+        Args:
+            threshold (int): The threshold at which an element will be tracked
+            width (int): The width of the count-min sketch
+            depth (int): The depth of the count-min sketch
+            confidence (float): The level of confidence desired
+            error_rate (float): The desired error rate
+            filepath (str): Path to file to load
+            hash_function (function): Hashing strategy function to use \
+            `hf(key, number)`
+        Returns:
+            StreamThreshold: A Count-Min Sketch object
+        Note:
+            Initialization order of operations:
+                1) From file
+                2) Width and depth
+                3) Confidence and error rate
+        Note:
+            Default query type is `min`
+        Note:
+            For width and depth, width may realistically be in the thousands \
+            while depth is in the single digit to teens  '''
     __slots__ = ['__threshold', '__meets_threshold']
 
     def __init__(self, threshold=100, width=None, depth=None,
